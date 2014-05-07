@@ -1,9 +1,9 @@
 /* global redux_change */
 /**
  * Typography
- * Dependencies		: google.com, jquery
- * Feature added by : Dovy Paukstys - http://simplerain.com/
- * Date				: 06.14.2013
+ * Dependencies:        google.com, jquery
+ * Feature added by:    Dovy Paukstys - http://simplerain.com/
+ * Date:                06.14.2013
  */
 jQuery.noConflict();
 /** Fire up jQuery - let's dance!
@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 
     Object.size = function(obj) {
         var size = 0,
-            key;
+                key;
         for (key in obj) {
             if (obj.hasOwnProperty(key)) {
                 size++;
@@ -63,7 +63,12 @@ jQuery(document).ready(function($) {
         // Get the styles and such from the font
         var details = "";
 
-        if (google && redux.fonts.google[family]) {
+        // Something went wrong trying to read google fonts, so turn google off
+        if (redux.fonts.google === undefined) {
+            google = false;
+        }
+
+        if (google && ( family in redux.fonts.google)) {
             details = redux.fonts.google[family];
         } else if (option.data('details')) {
             details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
